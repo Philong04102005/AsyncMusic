@@ -1,4 +1,4 @@
-import Fastify, { LogController } from "fastify";
+import Fastify, { LogController, type FastifyServerOptions } from "fastify";
 import cookie from "@fastify/cookie";
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
@@ -25,11 +25,8 @@ import { setupRealtime } from "./realtime";
 import { soundCloudTokenSource } from "./provider-tokens";
 import type { Config } from "./config";
 
-export async function buildServer(
-  config: Config,
-  providerOverrides?: Record<ProviderId, MusicProvider>,
-) {
-  const app = Fastify({
+export function serverOptions(config: Config): FastifyServerOptions {
+  return {
     logger:
       config.NODE_ENV === "test"
         ? false
@@ -47,7 +44,14 @@ export async function buildServer(
     logController: new LogController({ disableRequestLogging: true }),
     trustProxy: config.TRUST_PROXY === "true",
     bodyLimit: 16384,
-  });
+  };
+}
+
+export async function buildServer(
+  config: Config,
+  providerOverrides?: Record<ProviderId, MusicProvider>,
+  app = Fastify(serverOptions(config)),
+) {
   const redis = new Redis(config.REDIS_URL, {
     maxRetriesPerRequest: 2,
     connectTimeout: 5000,
