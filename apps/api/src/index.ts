@@ -1,5 +1,5 @@
 import { readConfig } from "./config";
-import { buildServer } from "./server";
+import { buildServer } from "./build-server";
 const config = readConfig();
 const { app } = await buildServer(config);
 await app.listen({ port: config.PORT, host: "0.0.0.0" });

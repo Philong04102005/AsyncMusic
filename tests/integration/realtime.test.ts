@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { io, type Socket } from "socket.io-client";
 import { randomBytes } from "node:crypto";
-import { buildServer } from "../../apps/api/src/server";
+import { buildServer } from "../../apps/api/src/build-server";
 import type { Config } from "../../apps/api/src/config";
 import type { MusicProvider } from "@resonance/providers";
 import {
