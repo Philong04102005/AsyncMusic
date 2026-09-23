@@ -1,0 +1,6 @@
+{
+  "name": "@resonance/database",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts"
+}

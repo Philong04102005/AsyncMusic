@@ -1,0 +1,11 @@
+{
+  "name": "@resonance/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=../../.env ../../node_modules/next/dist/bin/next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit"
+  }
+}
